@@ -1,4 +1,4 @@
-<transactionForm scriptid="custform_17_2568944_240" standard="STANDARDDROPSHIPPURCHASEORDER">
+<transactionForm scriptid="esp_cfi_dropship_po_form" standard="STANDARDDROPSHIPPURCHASEORDER">
   <name>CFI Drop Ship Purchase Order</name>
   <recordType>PURCHASEORDER</recordType>
   <inactive>F</inactive>

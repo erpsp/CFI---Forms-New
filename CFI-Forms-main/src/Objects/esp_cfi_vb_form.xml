@@ -1,8 +1,9 @@
-<transactionForm scriptid="custform_13_2568944_129" standard="STANDARDPURCHASEORDER">
-  <name>CFI Purchase Order</name>
-  <recordType>PURCHASEORDER</recordType>
+<transactionForm scriptid="esp_cfi_vb_form" standard="STANDARDVENDORBILL">
+  <name>CFI Vendor Bill</name>
+  <recordType>VENDORBILL</recordType>
   <inactive>F</inactive>
-  <preferred>T</preferred>
+  <preferred>F</preferred>
+  <storedWithRecord>T</storedWithRecord>
   <mainFields>
     <fieldGroup scriptid="primaryinformation">
       <label>Primary Information</label>
@@ -20,8 +21,17 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>OTHERREFNUM</id>
-          <label>Vendor #</label>
+          <id>TRANSACTIONNUMBER</id>
+          <label>Transaction Number</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>TRANID</id>
+          <label>Reference No.</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
@@ -38,8 +48,8 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>EMPLOYEE</id>
-          <label>Employee</label>
+          <id>ACCOUNT</id>
+          <label>Account</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
@@ -47,27 +57,44 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>SUPERVISORAPPROVAL</id>
-          <label>Supervisor Approval</label>
+          <id>TOTAL</id>
+          <label>Amount</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
         </field>
         <field>
-          <id>CREATEDFROM</id>
-          <label>Created From</label>
-          <visible>T</visible>
+          <id>CREDITLIMIT</id>
+          <label>Credit Limit</label>
+          <visible>F</visible>
           <mandatory>F</mandatory>
-          <displayType>DISABLED</displayType>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>CURRENCY</id>
+          <label>Currency</label>
+          <visible>T</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>EXCHANGERATE</id>
+          <label>Exchange Rate</label>
+          <visible>T</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
           <id>DUEDATE</id>
-          <label>Receive By</label>
+          <label>Due Date</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
@@ -84,8 +111,8 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>TRANID</id>
-          <label>PO #</label>
+          <id>MEMO</id>
+          <label>Memo</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
@@ -93,8 +120,8 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>MEMO</id>
-          <label>Memo</label>
+          <id>APPROVALSTATUS</id>
+          <label>Approval Status</label>
           <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
@@ -111,38 +138,73 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>TRANSACTIONNUMBER</id>
-          <label>Transaction Number</label>
-          <visible>F</visible>
+          <id>VATREGNUM</id>
+          <label>Tax ID</label>
+          <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>GENERATETRANIDONSAVE</id>
-          <label>Generate Document Number on Save</label>
-          <visible>F</visible>
+          <id>TAXTOTAL</id>
+          <label>Tax</label>
+          <visible>T</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>UNCHECKED</checkBoxDefault>
+        </field>
+        <field>
+          <id>TAX2TOTAL</id>
+          <label>PST</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>DISCOUNTAMOUNT</id>
+          <label>Disc. Amt.</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>DISABLED</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>DISCOUNTDATE</id>
+          <label>Disc. Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>DISABLED</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>POSTINGPERIOD</id>
+          <label>Posting Period</label>
+          <visible>T</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>PAYMENTHOLD</id>
+          <label>Payment Hold</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
           <id>AVAILABLEVENDORCREDIT</id>
           <label>Available Vendor Credit</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>CURRENCY</id>
-          <label>Currency</label>
           <visible>T</visible>
-          <mandatory>T</mandatory>
+          <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
@@ -155,15 +217,6 @@
       <showTitle>T</showTitle>
       <singleColumn>F</singleColumn>
       <fields position="MIDDLE">
-        <field>
-          <id>APPROVALSTATUS</id>
-          <label>Approval Status</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
         <field>
           <id>SUBSIDIARY</id>
           <label>Subsidiary</label>
@@ -200,6 +253,15 @@
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
+        <field>
+          <id>[type=transactionbodycustomfield, scriptid=cseg_cbi_market]</id>
+          <label>Market</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
       </fields>
     </fieldGroup>
     <fieldGroup scriptid="intercompanymanagement">
@@ -208,25 +270,25 @@
       <showTitle>T</showTitle>
       <singleColumn>F</singleColumn>
     </fieldGroup>
-    <fieldGroup scriptid="fieldgroup_1_2568944_591">
+    <fieldGroup scriptid="fieldgroup_1_2568944_727">
       <label>Order Information</label>
       <visible>T</visible>
       <showTitle>T</showTitle>
       <singleColumn>F</singleColumn>
       <fields position="MIDDLE">
         <field>
-          <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custbody_cfi_acknowledgement_nu]</id>
-          <label>Acknowledgement #</label>
-          <visible>T</visible>
+          <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custbody_cfi_ack_ship_date]</id>
+          <label>Acknowledgement Ship Date</label>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custbody_cfi_ack_ship_date]</id>
-          <label>Acknowledgement Ship Date</label>
-          <visible>T</visible>
+          <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custbody_cfi_acknowledgement_nu]</id>
+          <label>Acknowledgement #</label>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
@@ -235,61 +297,20 @@
         <field>
           <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custbody_cfi_ack_status]</id>
           <label>Acknowledgement Status</label>
-          <visible>T</visible>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
+      </fields>
+    </fieldGroup>
+    <defaultFieldGroup>
+      <fields position="MIDDLE">
         <field>
           <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_reacknowledgement_count]</id>
           <label>Re-acknoweldgement Count</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>DISABLED</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[scriptid=custbody_ordered_by]</id>
-          <label>Ordered By</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.knollintegration, scriptid=custbody_esp_ki_so_customer]</id>
-          <label>Sales Order Customer</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfifields, scriptid=custbody_esp_cfi_so_order_type]</id>
-          <label>Order Type</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.knollintegration, scriptid=custbody_esp_ki_order_type]</id>
-          <label>Knoll Order Type</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[scriptid=custbody_esp_po_type_static]</id>
-          <label>PO Type [static]</label>
-          <visible>T</visible>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
@@ -298,7 +319,126 @@
         <field>
           <id>[appid=com.erpsuccess.knollintegration, scriptid=custbody_esp_ki_arrival_date]</id>
           <label>Arrival Date</label>
-          <visible>T</visible>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.knollintegration, scriptid=custbody_esp_ki_so_customer]</id>
+          <label>Sales Order Customer</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>INTERCOSTATUS</id>
+          <label>Intercompany Status</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>INTERCOTRANSACTION</id>
+          <label>Paired Intercompany Transaction</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.knollintegration, scriptid=custbody_esp_ki_order_type]</id>
+          <label>Knoll Order Type</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfifields, scriptid=custbody_esp_cfi_so_order_type]</id>
+          <label>Order Type</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_discre_stat_fld]</id>
+          <label>Haworth Discrepancy Status</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_discrepancy_notes]</id>
+          <label>Haworth Discrepancy Notes</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>INLINETEXT</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfifields, scriptid=custbody_esp_pob_po_type]</id>
+          <label>PO Breakout Type</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custbody_esp_cfi_co_is_corr_order]</id>
+          <label>Is Corrective Order</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custbody_esp_cfi_co_original_trans]</id>
+          <label>Original Transaction</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custbody_ordered_by]</id>
+          <label>Ordered By</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custbody_esp_ki_hide_knoll_xml_btn]</id>
+          <label>Hide Knoll XML Button</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+        </field>
+        <field>
+          <id>[scriptid=custbody_esp_po_type_static]</id>
+          <label>PO Type [static]</label>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
@@ -332,6 +472,15 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
+          <id>[appid=com.erpsuccess.cfifieldservicelite, scriptid=custbody_esp_po_internal_notes]</id>
+          <label>Internal Notes</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
           <id>[appid=com.erpsuccess.cfifieldservicelite, scriptid=custbody_esp_requested_ship_date]</id>
           <label>Requested Ship Date</label>
           <visible>T</visible>
@@ -350,13 +499,14 @@
           <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
-          <id>[appid=com.erpsuccess.cfifields, scriptid=custbody_esp_pob_po_type]</id>
-          <label>PO Breakout Type</label>
-          <visible>T</visible>
+          <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_esp_pi_exclude_overhead_fee]</id>
+          <label>Exclude Overhead Fee</label>
+          <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
+          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
         </field>
         <field>
           <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_esp_po_link_type]</id>
@@ -366,150 +516,6 @@
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[scriptid=custbody_esp_ki_hide_knoll_xml_btn]</id>
-          <label>Hide Knoll XML Button</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_historical_po]</id>
-          <label>Historical PO for Order Revisions</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>INLINETEXT</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_orig_po]</id>
-          <label>Original Purchase Order</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_so_oi]</id>
-          <label>Project Insight</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>INLINETEXT</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_source_po]</id>
-          <label>Source Purchase Order for Order Revisions</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_ref_po]</id>
-          <label>Reference Purchase Order (Order Revisions)</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-      </fields>
-    </fieldGroup>
-    <defaultFieldGroup>
-      <fields position="MIDDLE">
-        <field>
-          <id>FIRMED</id>
-          <label>Firmed</label>
-          <visible>T</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-        </field>
-        <field>
-          <id>INTERCOTRANSACTION</id>
-          <label>Paired Intercompany Transaction</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>INTERCOSTATUS</id>
-          <label>Intercompany Status</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_discre_stat_fld]</id>
-          <label>Haworth Discrepancy Status</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_discrepancy_notes]</id>
-          <label>Haworth Discrepancy Notes</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>INLINETEXT</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custbody_esp_cfi_co_is_corr_order]</id>
-          <label>Is Corrective Order</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custbody_esp_cfi_co_original_trans]</id>
-          <label>Original Transaction</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.cfifieldservicelite, scriptid=custbody_esp_po_internal_notes]</id>
-          <label>Internal Notes</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-        </field>
-        <field>
-          <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_esp_pi_exclude_overhead_fee]</id>
-          <label>Exclude Overhead Fee</label>
-          <visible>F</visible>
-          <mandatory>F</mandatory>
-          <displayType>NORMAL</displayType>
-          <columnBreak>F</columnBreak>
-          <sameRowAsPrevious>F</sameRowAsPrevious>
-          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
         </field>
         <field>
           <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_esp_oi_cost_reco_cos2]</id>
@@ -547,6 +553,15 @@
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
           <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.orderinsight, scriptid=custbody_so_oi]</id>
+          <label>Project Insight</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>INLINETEXT</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
         </field>
         <field>
           <id>[appid=com.erpsuccess.cfisatelliteintegration, scriptid=custbody_exclude_from_survey]</id>
@@ -624,13 +639,41 @@
           <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
         </field>
         <field>
-          <id>[type=transactionbodycustomfield, scriptid=cseg_esp_warehouse]</id>
-          <label>Warehouse</label>
+          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_orig_po]</id>
+          <label>Original Purchase Order</label>
           <visible>F</visible>
           <mandatory>F</mandatory>
           <displayType>NORMAL</displayType>
           <columnBreak>F</columnBreak>
           <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_source_po]</id>
+          <label>Source Purchase Order for Order Revisions</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_ref_po]</id>
+          <label>Reference Purchase Order (Order Revisions)</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_historical_po]</id>
+          <label>Historical PO for Order Revisions</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>INLINETEXT</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+          <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
         </field>
       </fields>
     </defaultFieldGroup>
@@ -638,16 +681,16 @@
   <tabs>
     <tab>
       <id>TRANSACTIONITEMS</id>
-      <label>Items</label>
+      <label>Expenses and Items</label>
       <visible>T</visible>
       <fieldGroups>
         <defaultFieldGroup>
           <fields position="MIDDLE">
             <field>
-              <id>EXCHANGERATE</id>
-              <label>Exchange rate</label>
-              <visible>T</visible>
-              <mandatory>T</mandatory>
+              <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_sif_dropbox]</id>
+              <label>Dropbox</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
@@ -661,717 +704,10 @@
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
-            <field>
-              <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_sif_dropbox]</id>
-              <label>Dropbox</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
           </fields>
         </defaultFieldGroup>
       </fieldGroups>
       <subItems>
-        <subList>
-          <id>ITEM</id>
-          <label>Items</label>
-          <visible>T</visible>
-          <neverEmpty>F</neverEmpty>
-          <columns>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cfi_linenum]</id>
-              <label>ESP CFI Line Number</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>ITEM</id>
-              <label>Item</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_part_number]</id>
-              <label>Part Number</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>QUANTITY</id>
-              <label>Quantity</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>DESCRIPTION</id>
-              <label>Description</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>INVENTORYDETAIL</id>
-              <label>Inventory Detail</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_tran_dealer_disc]</id>
-              <label>Dealer Discount</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_tranlist]</id>
-              <label>List Price</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_list_ext_amount]</id>
-              <label>Extended List</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>RATE</id>
-              <label>Rate</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>AMOUNT</id>
-              <label>Amount</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pob_po_type]</id>
-              <label>PO Breakout Type</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>TAXCODE</id>
-              <label>Tax Code</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>TAXRATE1</id>
-              <label>GST</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>TAXRATE2</id>
-              <label>PST</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>OPTIONS</id>
-              <label>Options</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>DISPLAYNAME</id>
-              <label>Display Name</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.knollintegration, scriptid=custcol_esp_ki_arrival_date]</id>
-              <label>Arrival Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_req_del_date_line]</id>
-              <label>Requested Delivery Date - Line</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custcol_esp_addr_altshipto]</id>
-              <label>Alternate Ship To</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_requested_date]</id>
-              <label>Requested Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custcol_esp_addr_altshipto_addr]</id>
-              <label>Alternate Ship To Address</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>DEPARTMENT</id>
-              <label>Department</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>CLASS</id>
-              <label>Division</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>LOCATION</id>
-              <label>Location</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_ec]</id>
-              <label>Enterprise Code</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_mc]</id>
-              <label>Manufacturer Code</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_optioncodes]</id>
-              <label>Option Codes</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_od]</id>
-              <label>Option Description</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag1]</id>
-              <label>Tag 1</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag2]</id>
-              <label>Tag 2</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag3]</id>
-              <label>Tag 3</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag4]</id>
-              <label>Tag 4</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag5]</id>
-              <label>Tag 5</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_number]</id>
-              <label>Acknowledgement #</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_ship_date]</id>
-              <label>Acknowledgement Ship Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_status]</id>
-              <label>Acknowledgement Status</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_acknowledgement]</id>
-              <label>Acknowledgment</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>QUANTITYAVAILABLE</id>
-              <label>Available</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>AVERAGECOST</id>
-              <label>Average Cost</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>LASTPURCHASEPRICE</id>
-              <label>Last Purchase Price</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>QUANTITYONHAND</id>
-              <label>On Hand</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>UNITS</id>
-              <label>Units</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>TAX1AMT</id>
-              <label>Tax Amt</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>GROSSAMT</id>
-              <label>Gross Amt</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>CUSTOMER</id>
-              <label>Customer</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>ISBILLABLE</id>
-              <label>Billable</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>MATCHBILLTORECEIPT</id>
-              <label>Match Bill To Receipt</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>QUANTITYRECEIVED</id>
-              <label>Received</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>TOBERECEIVED</id>
-              <label>To Be Received</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>EXPECTEDRECEIPTDATE</id>
-              <label>Expected Receipt Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>ISCLOSED</id>
-              <label>Closed</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>BILLVARIANCESTATUS</id>
-              <label>Bill Variance Status</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>GENERATEACCRUALS</id>
-              <label>Generate Accruals</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_po_vendor]</id>
-              <label>LIT Vendor</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_custdisc]</id>
-              <label>Customer Discount</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_option_label]</id>
-              <label>SIF Option Label</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipunch, scriptid=custcol_esp_pp_punch_popup]</id>
-              <label>Punch Popup (View Mode)</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipunch, scriptid=custcol_esp_pp_punch_popup_em]</id>
-              <label>Punch Popup (Edit Mode)</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_document_id]</id>
-              <label>Haworth Document ID</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_errors]</id>
-              <label>Haworth Errors</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_send_status]</id>
-              <label>Sent To Haworth</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_addr_ship_to]</id>
-              <label>Ship To Partner Number</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_response]</id>
-              <label>Response</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_haw_ship_date_test]</id>
-              <label>HAW Ship Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_haw_del_date_test]</id>
-              <label>HAW Delivery Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_cbi_altshipto]</id>
-              <label>CBI Alternate Ship To</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_cbi_shiptoadd]</id>
-              <label>Ship To Address</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_cfi_remove_from_pdf]</id>
-              <label>Remove From PDF</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_bill_to]</id>
-              <label>Direct Bill To</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_cfi_direct_billing_invoic]</id>
-              <label>Related Invoice</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_test_date]</id>
-              <label>Test Date</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.pobreakout, scriptid=custcol_esp_pob_prevent_po_creation]</id>
-              <label>Prevent PO Creation</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_notes]</id>
-              <label>Sync Notes</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_sync_to_po]</id>
-              <label>Will Sync to PO</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_line_stat]</id>
-              <label>Line Status</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_status]</id>
-              <label>Sync Status</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_vendor]</id>
-              <label>Direct Bill Vendor</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_contract]</id>
-              <label>Contract</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[type=transactioncolumncustomfield, scriptid=cseg_cbi_market]</id>
-              <label>Market</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custcol_esp_cfi_co_orig_so_uuid]</id>
-              <label>Original SO UUID</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_line_iterator]</id>
-              <label>Line Iterator</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_line_item_tag]</id>
-              <label>Line Item Tag</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_ack_discrepancy]</id>
-              <label>Haworth Response Discrepancy</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_cfi_hi_disc_notes]</id>
-              <label>Haworth Discrepancy Notes</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_gc]</id>
-              <label>Generic Code</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_err_resolved]</id>
-              <label>Haworth Errors Resolved?</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cfi_contract_num]</id>
-              <label>Contract Number</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[type=transactioncolumncustomfield, scriptid=cseg_test_segment_g]</id>
-              <label>Test Segment GL</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_bill_to_sell]</id>
-              <label>Direct Bill Sell</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_include_dsf]</id>
-              <label>Include DSF Fee</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol1]</id>
-              <label>Profit, $</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_ack_ship_date]</id>
-              <label>Haworth ACK Ship Date</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cvdp_discrepancy]</id>
-              <label>Cost Verification Discrepancy</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pi_ack_disc_popup]</id>
-              <label>Acknowledgement Discrepancy</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_attached_file]</id>
-              <label>Attached File Line Item</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_cost_verified]</id>
-              <label>Cost Verified</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_exclude_commission]</id>
-              <label>Exclude Commission</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_is_cost_recognized]</id>
-              <label>Is Cost Recognized</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_time_act_cost]</id>
-              <label>Actual Cost</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_type]</id>
-              <label>PI Type</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_time_pi]</id>
-              <label>Project Insights</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipamount]</id>
-              <label>CFI Project Insight WIP Amount</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipitem]</id>
-              <label>CFI Project Insight WIP Item</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipqty]</id>
-              <label>CFI Project Insight WIP Quantity</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wiprate]</id>
-              <label>CFI Project Insight WIP Rate</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_order_insight]</id>
-              <label>Project Insight</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_oi_order_insight_uuid]</id>
-              <label>CFI Project Insight UUID</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_cost_recog]</id>
-              <label>Cost Recog</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_is_dir_bill_discount]</id>
-              <label>Is Direct Billing Discount</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_order_status]</id>
-              <label>Order Status</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_send_to_quote_tool]</id>
-              <label>Send to Quote Tool</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_order]</id>
-              <label>Manufacturer Order</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_contract]</id>
-              <label>Manufacturer Contract</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_override_cost]</id>
-              <label>Override Cost</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.dynamicpdfselector, scriptid=custcol_esp_cfi_grouping]</id>
-              <label>Group</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.dynamicpdfselector, scriptid=custcol_esp_pdf_dnp_line]</id>
-              <label>Do Not Print</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_po_memo_from_so_body]</id>
-              <label>PO Memo from SO Header</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_linked_po]</id>
-              <label>Related PO</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_wrm_reg_warrantyreg]</id>
-              <label>Register Warranty</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_wrm_reg_warrantyterms]</id>
-              <label>Warranty Terms (2)</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_wrm_reg_warrantyexpire]</id>
-              <label>Original Warranty Expiration</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pi_ack_disc]</id>
-              <label>Acknowledgement Discrepancy (List/Record)</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_lit_parent_map]</id>
-              <label>LIT Parent Map</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol2]</id>
-              <label>3rd Party Billing Vendor</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_oa_mark_order_revision]</id>
-              <label>Mark for Order Revision</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_oa_new_related_po]</id>
-              <label>Add to Existing PO</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_included_in_discount]</id>
-              <label>Included in DB Discount (2)</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol4]</id>
-              <label>test</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_exclude_from_discount]</id>
-              <label>Exclude from Direct Bill Discount</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_included_in_dsf]</id>
-              <label>Included in DSF Total</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_lit_filename]</id>
-              <label>LIT File Name (2)</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_haw_item_code]</id>
-              <label>Haworth Item Code</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_comment_desc]</id>
-              <label>Haworth Comment Description</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_comment_type_list]</id>
-              <label>Haworth Comment Type</label>
-              <visible>T</visible>
-            </column>
-            <column>
-              <id>[type=transactioncolumncustomfield, scriptid=cseg_esp_warehouse]</id>
-              <label>Warehouse</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol5]</id>
-              <label>Test Column</label>
-              <visible>F</visible>
-            </column>
-            <column>
-              <id>[scriptid=custcol_esp_test_oa_notes]</id>
-              <label>Test Column Notes for OA</label>
-              <visible>F</visible>
-            </column>
-          </columns>
-        </subList>
         <subList>
           <id>EXPENSE</id>
           <label>Expenses</label>
@@ -1430,7 +766,7 @@
             </column>
             <column>
               <id>CLASS</id>
-              <label>Division</label>
+              <label>Class</label>
               <visible>T</visible>
             </column>
             <column>
@@ -1444,14 +780,14 @@
               <visible>T</visible>
             </column>
             <column>
-              <id>ISBILLABLE</id>
-              <label>Billable</label>
-              <visible>T</visible>
-            </column>
-            <column>
               <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_ec]</id>
               <label>Enterprise Code</label>
               <visible>F</visible>
+            </column>
+            <column>
+              <id>ISBILLABLE</id>
+              <label>Billable</label>
+              <visible>T</visible>
             </column>
             <column>
               <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_mc]</id>
@@ -1560,7 +896,7 @@
             </column>
             <column>
               <id>[scriptid=custcol_cbi_altshipto]</id>
-              <label>Alternate Ship To</label>
+              <label>CBI Alternate Ship To</label>
               <visible>F</visible>
             </column>
             <column>
@@ -1574,8 +910,13 @@
               <visible>F</visible>
             </column>
             <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_vendor]</id>
+              <label>Direct Bill Vendor</label>
+              <visible>F</visible>
+            </column>
+            <column>
               <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_bill_to]</id>
-              <label>Direct Billing Bill To</label>
+              <label>Direct Bill To</label>
               <visible>F</visible>
             </column>
             <column>
@@ -1600,7 +941,7 @@
             </column>
             <column>
               <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_acknowledgement]</id>
-              <label>HM Acknowledgment (2)</label>
+              <label>Acknowledgment</label>
               <visible>F</visible>
             </column>
             <column>
@@ -1610,7 +951,7 @@
             </column>
             <column>
               <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custcol_esp_addr_altshipto]</id>
-              <label>Alternate Ship To (2)</label>
+              <label>Alternate Ship To</label>
               <visible>F</visible>
             </column>
             <column>
@@ -1654,6 +995,11 @@
               <visible>F</visible>
             </column>
             <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_linked_po]</id>
+              <label>Link to PO</label>
+              <visible>F</visible>
+            </column>
+            <column>
               <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_notes]</id>
               <label>Sync Notes</label>
               <visible>F</visible>
@@ -1674,24 +1020,19 @@
               <visible>F</visible>
             </column>
             <column>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_vendor]</id>
-              <label>Direct Bill Vendor</label>
+              <id>[scriptid=custcol_esp_contract]</id>
+              <label>Contract</label>
               <visible>F</visible>
             </column>
             <column>
-              <id>[scriptid=custcol_esp_contract]</id>
-              <label>Contract</label>
+              <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custcol_esp_cfi_co_orig_so_uuid]</id>
+              <label>Original SO UUID</label>
               <visible>F</visible>
             </column>
             <column>
               <id>[type=transactioncolumncustomfield, scriptid=cseg_cbi_market]</id>
               <label>Market</label>
               <visible>T</visible>
-            </column>
-            <column>
-              <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custcol_esp_cfi_co_orig_so_uuid]</id>
-              <label>Original SO UUID</label>
-              <visible>F</visible>
             </column>
             <column>
               <id>[scriptid=custcol_line_iterator]</id>
@@ -1884,11 +1225,6 @@
               <visible>F</visible>
             </column>
             <column>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_linked_po]</id>
-              <label>Related PO</label>
-              <visible>F</visible>
-            </column>
-            <column>
               <id>[scriptid=custcol_wrm_reg_warrantyreg]</id>
               <label>Register Warranty</label>
               <visible>F</visible>
@@ -1981,6 +1317,664 @@
             <column>
               <id>[scriptid=custcol5]</id>
               <label>Test Column</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_test_oa_notes]</id>
+              <label>Test Column Notes for OA</label>
+              <visible>F</visible>
+            </column>
+          </columns>
+        </subList>
+        <subList>
+          <id>ITEM</id>
+          <label>Items</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+          <columns>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cfi_linenum]</id>
+              <label>ESP CFI Line Number</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>ITEM</id>
+              <label>Item</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>DISPLAYNAME</id>
+              <label>Display Name</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>VENDORNAME</id>
+              <label>Vendor Name</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>QUANTITY</id>
+              <label>Quantity</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>UNITS</id>
+              <label>Units</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>INVENTORYDETAIL</id>
+              <label>Inventory Detail</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>DESCRIPTION</id>
+              <label>Description</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>RATE</id>
+              <label>Unit sell</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>AMOUNT</id>
+              <label>Ext. sell</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>TAXCODE</id>
+              <label>Tax Code</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>TAXRATE1</id>
+              <label>GST</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>TAXRATE2</id>
+              <label>PST</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>GROSSAMT</id>
+              <label>Gross Amt</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>TAX1AMT</id>
+              <label>Tax Amt</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>OPTIONS</id>
+              <label>Options</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>DEPARTMENT</id>
+              <label>Department</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>CLASS</id>
+              <label>Division</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>LOCATION</id>
+              <label>Location</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>CUSTOMER</id>
+              <label>Customer</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>ISBILLABLE</id>
+              <label>Billable</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>BILLRECEIPTS</id>
+              <label>Receipts</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>BILLVARIANCESTATUS</id>
+              <label>Bill Variance Status</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_ec]</id>
+              <label>Enterprise Code</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_mc]</id>
+              <label>Manufacturer Code</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_po_vendor]</id>
+              <label>LIT Vendor</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_custdisc]</id>
+              <label>Customer Discount</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_od]</id>
+              <label>Option Description</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_option_label]</id>
+              <label>SIF Option Label</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_optioncodes]</id>
+              <label>Option Codes</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag1]</id>
+              <label>Tag 1</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag2]</id>
+              <label>Tag 2</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag3]</id>
+              <label>Tag 3</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag4]</id>
+              <label>Tag 4</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_tag5]</id>
+              <label>Tag 5</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipunch, scriptid=custcol_esp_pp_punch_popup]</id>
+              <label>Punch Popup (View Mode)</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipunch, scriptid=custcol_esp_pp_punch_popup_em]</id>
+              <label>Punch Popup (Edit Mode)</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_document_id]</id>
+              <label>Haworth Document ID</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_errors]</id>
+              <label>Haworth Errors</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_send_status]</id>
+              <label>Sent To Haworth</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_addr_ship_to]</id>
+              <label>Ship To Partner Number</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_response]</id>
+              <label>Response</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_number]</id>
+              <label>Acknowledgement #</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_ship_date]</id>
+              <label>Acknowledgement Ship Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfibasemanualacknowledgement, scriptid=custcol_cfi_ack_status]</id>
+              <label>Acknowledgement Status</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_cbi_altshipto]</id>
+              <label>CBI Alternate Ship To</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_cbi_shiptoadd]</id>
+              <label>Ship To Address</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_cfi_remove_from_pdf]</id>
+              <label>Remove From PDF</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_vendor]</id>
+              <label>Direct Bill Vendor</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_bill_to]</id>
+              <label>Direct Bill To</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.knollintegration, scriptid=custcol_esp_ki_arrival_date]</id>
+              <label>Arrival Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_cfi_direct_billing_invoic]</id>
+              <label>Related Invoice</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_haw_ship_date_test]</id>
+              <label>HAW Ship Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_haw_del_date_test]</id>
+              <label>HAW Delivery Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_acknowledgement]</id>
+              <label>Acknowledgment</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_test_date]</id>
+              <label>Test Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custcol_esp_addr_altshipto]</id>
+              <label>Alternate Ship To</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custcol_esp_addr_altshipto_addr]</id>
+              <label>Alternate Ship To Address</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_sif_list_ext_amount]</id>
+              <label>Extended List</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_tran_dealer_disc]</id>
+              <label>Dealer Discount</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_tranlist]</id>
+              <label>List Price</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.pobreakout, scriptid=custcol_esp_pob_prevent_po_creation]</id>
+              <label>Prevent PO Creation</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_req_del_date_line]</id>
+              <label>Requested Delivery Date - Line</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pob_po_type]</id>
+              <label>PO Breakout Type</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_linked_po]</id>
+              <label>Link to PO</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_notes]</id>
+              <label>Sync Notes</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_sync_to_po]</id>
+              <label>Will Sync to PO</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_line_stat]</id>
+              <label>Line Status</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_cfi_so_po_sync_status]</id>
+              <label>Sync Status</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_contract]</id>
+              <label>Contract</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfichangeorders, scriptid=custcol_esp_cfi_co_orig_so_uuid]</id>
+              <label>Original SO UUID</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[type=transactioncolumncustomfield, scriptid=cseg_cbi_market]</id>
+              <label>Market</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_line_iterator]</id>
+              <label>Line Iterator</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_line_item_tag]</id>
+              <label>Line Item Tag</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_ack_discrepancy]</id>
+              <label>Haworth Response Discrepancy</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_requested_date]</id>
+              <label>Requested Date</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_esp_cfi_hi_disc_notes]</id>
+              <label>Haworth Discrepancy Notes</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_gc]</id>
+              <label>Generic Code</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_err_resolved]</id>
+              <label>Haworth Errors Resolved?</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cfi_contract_num]</id>
+              <label>Contract Number</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[type=transactioncolumncustomfield, scriptid=cseg_test_segment_g]</id>
+              <label>Test Segment GL</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_bill_to_sell]</id>
+              <label>Direct Bill Sell</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_include_dsf]</id>
+              <label>Include DSF Fee</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol1]</id>
+              <label>Profit, $</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_ack_ship_date]</id>
+              <label>Haworth ACK Ship Date</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_cvdp_discrepancy]</id>
+              <label>Cost Verification Discrepancy</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pi_ack_disc_popup]</id>
+              <label>Acknowledgement Discrepancy</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_attached_file]</id>
+              <label>Attached File Line Item</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_cost_verified]</id>
+              <label>Cost Verified</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_exclude_commission]</id>
+              <label>Exclude Commission</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_is_cost_recognized]</id>
+              <label>Is Cost Recognized</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_time_act_cost]</id>
+              <label>Actual Cost</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_type]</id>
+              <label>PI Type</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_time_pi]</id>
+              <label>Project Insights</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipamount]</id>
+              <label>CFI Project Insight WIP Amount</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipitem]</id>
+              <label>CFI Project Insight WIP Item</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wipqty]</id>
+              <label>CFI Project Insight WIP Quantity</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_defexp_wiprate]</id>
+              <label>CFI Project Insight WIP Rate</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_oi_order_insight]</id>
+              <label>Project Insight</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_oi_order_insight_uuid]</id>
+              <label>CFI Project Insight UUID</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_cost_recog]</id>
+              <label>Cost Recog</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_is_dir_bill_discount]</id>
+              <label>Is Direct Billing Discount</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_order_status]</id>
+              <label>Order Status</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_send_to_quote_tool]</id>
+              <label>Send to Quote Tool</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_order]</id>
+              <label>Manufacturer Order</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custcol_esp_mc_contract]</id>
+              <label>Manufacturer Contract</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.orderinsight, scriptid=custcol_esp_pi_override_cost]</id>
+              <label>Override Cost</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.dynamicpdfselector, scriptid=custcol_esp_cfi_grouping]</id>
+              <label>Group</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.dynamicpdfselector, scriptid=custcol_esp_pdf_dnp_line]</id>
+              <label>Do Not Print</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_po_memo_from_so_body]</id>
+              <label>PO Memo from SO Header</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_wrm_reg_warrantyreg]</id>
+              <label>Register Warranty</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_wrm_reg_warrantyterms]</id>
+              <label>Warranty Terms (2)</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol_wrm_reg_warrantyexpire]</id>
+              <label>Original Warranty Expiration</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_part_number]</id>
+              <label>Part Number</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfifields, scriptid=custcol_esp_pi_ack_disc]</id>
+              <label>Acknowledgement Discrepancy (List/Record)</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_lit_parent_map]</id>
+              <label>LIT Parent Map</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol2]</id>
+              <label>3rd Party Billing Vendor</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_oa_mark_order_revision]</id>
+              <label>Mark for Order Revision</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custcol_esp_oa_new_related_po]</id>
+              <label>Add to Existing PO</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_included_in_discount]</id>
+              <label>Included in DB Discount (2)</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol4]</id>
+              <label>test</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_exclude_from_discount]</id>
+              <label>Exclude from Direct Bill Discount</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.directbilling, scriptid=custcol_esp_db_included_in_dsf]</id>
+              <label>Included in DSF Total</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.lineimport, scriptid=custcol_esp_lit_filename]</id>
+              <label>LIT File Name (2)</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_cfi_hi_haw_item_code]</id>
+              <label>Haworth Item Code</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_comment_desc]</id>
+              <label>Haworth Comment Description</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custcol_esp_hi_comment_type_list]</id>
+              <label>Haworth Comment Type</label>
+              <visible>T</visible>
+            </column>
+            <column>
+              <id>[scriptid=custcol5]</id>
+              <label>Test Column</label>
+              <visible>F</visible>
+            </column>
+            <column>
+              <id>[type=transactioncolumncustomfield, scriptid=cseg_esp_warehouse]</id>
+              <label>Warehouse</label>
               <visible>F</visible>
             </column>
             <column>
@@ -2362,172 +2356,16 @@
       <subItems/>
     </tab>
     <tab>
-      <id>TRANSACTIONADDRESS</id>
-      <label>Address</label>
+      <id>TRANSACTIONBILLING</id>
+      <label>Billing</label>
       <visible>T</visible>
       <fieldGroups>
-        <fieldGroup scriptid="fieldgroup_4_2568944_429">
-          <label>Subcontractor Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-          <fields position="MIDDLE">
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_shipto_subvendor]</id>
-              <label>Subcontractor Address</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_addr_sub_contr_contact]</id>
-              <label>Subcontractor Contact</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_project_addr_sub_all]</id>
-              <label>Subcontractor Address Select</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_shipto_subvendor_addr]</id>
-              <label>Subcontractor</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </fieldGroup>
-        <fieldGroup scriptid="fieldgroup_5_2568944_462">
-          <label>Shipping Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-          <fields position="MIDDLE">
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_shipping_route]</id>
-              <label>Shipping Route</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_addr_ship_to_contact]</id>
-              <label>Ship To Contact</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_addr_receiving_contact]</id>
-              <label>Receiving Contact</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_ship_to_address]</id>
-              <label>Shipping Address</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </fieldGroup>
-        <fieldGroup scriptid="fieldgroup_6_2568944_173">
-          <label>Installation Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-          <fields position="MIDDLE">
-            <field>
-              <id>SHIPTO</id>
-              <label>Install To</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPADDRESSLIST</id>
-              <label>Install To Select</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPADDRESS</id>
-              <label>Installation Address</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_addr_installation_contact]</id>
-              <label>Installation Contact</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </fieldGroup>
-        <fieldGroup scriptid="fieldgroup_7_2568944_176">
-          <label>Shipping Information</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-        </fieldGroup>
-        <fieldGroup scriptid="fieldgroup_8_2568944_776">
+        <fieldGroup scriptid="bilinginformation">
           <label>Billing Information</label>
           <visible>T</visible>
           <showTitle>T</showTitle>
           <singleColumn>F</singleColumn>
           <fields position="MIDDLE">
-            <field>
-              <id>BILLADDRESSLIST</id>
-              <label>Vendor Select</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>BILLADDRESS</id>
-              <label>Vendor</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
             <field>
               <id>TERMS</id>
               <label>Terms</label>
@@ -2547,6 +2385,28 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
+              <id>BILLADDRESSLIST</id>
+              <label>Vendor Select</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>BILLADDRESS</id>
+              <label>Vendor</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+          </fields>
+        </fieldGroup>
+        <defaultFieldGroup>
+          <fields position="MIDDLE">
+            <field>
               <id>[appid=com.erpsuccess.cfibaseaddress, scriptid=custbody_esp_addr_bill_to_contact]</id>
               <label>Bill To Contact</label>
               <visible>T</visible>
@@ -2556,179 +2416,83 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
           </fields>
-        </fieldGroup>
-        <defaultFieldGroup/>
-      </fieldGroups>
-      <subItems/>
-    </tab>
-    <tab>
-      <id>TRANSACTIONSHIPPING</id>
-      <label>Shipping</label>
-      <visible>T</visible>
-      <fieldGroups>
-        <fieldGroup scriptid="fieldgroup_2_2568944_673">
-          <label>Subcontractor Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-        </fieldGroup>
-        <fieldGroup scriptid="fieldgroup_3_2568944_971">
-          <label>Shipping Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-        </fieldGroup>
-        <fieldGroup scriptid="shippingaddress">
-          <label>Installation Address</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-        </fieldGroup>
-        <fieldGroup scriptid="shippinginformation">
-          <label>Installation Information</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-        </fieldGroup>
-        <defaultFieldGroup>
-          <fields position="MIDDLE">
-            <field>
-              <id>HANDLINGTAX2RATE</id>
-              <label>Handling Tax Rate 2</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>HANDLINGTAX1RATE</id>
-              <label>Handling Tax Rate</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>HANDLINGTAXCODE</id>
-              <label>Handling Tax Code</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPPINGTAX2RATE</id>
-              <label>Shipping Tax Rate 2</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPPINGTAX1RATE</id>
-              <label>Shipping Tax Rate</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPPINGTAXCODE</id>
-              <label>Shipping Tax Code</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>T</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>TRACKINGNUMBERS</id>
-              <label>Tracking #</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>FOB</id>
-              <label>FOB</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPCARRIER</id>
-              <label>Shipping Carrier</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPMETHOD</id>
-              <label>Shipping Method</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>SHIPDATE</id>
-              <label>Ship Date</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.directbilling, scriptid=custbody_esp_cfi_isdirectbill]</id>
-              <label>Direct Bill</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-              <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-            </field>
-          </fields>
         </defaultFieldGroup>
       </fieldGroups>
       <subItems/>
     </tab>
     <tab>
-      <id>TRANSACTIONBILLING</id>
-      <label>Billing</label>
+      <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custtab_esp_influencers]</id>
+      <label>Influencers</label>
       <visible>T</visible>
       <fieldGroups>
-        <defaultFieldGroup/>
-      </fieldGroups>
-      <subItems/>
-    </tab>
-    <tab>
-      <id>TRANSACTIONACCOUNTING</id>
-      <label>Accounting</label>
-      <visible>T</visible>
-      <fieldGroups>
-        <fieldGroup scriptid="accountinformation">
-          <label>Account Information</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
+        <defaultFieldGroup>
           <fields position="MIDDLE">
             <field>
-              <id>ACCOUNT</id>
-              <label>Account</label>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_archdesign]</id>
+              <label> ARCH &amp; DESIGN FIRM</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_construction_manager]</id>
+              <label>CONSTRUCTION MANAGER</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_generalcontractor]</id>
+              <label>GENERAL CONTRACTOR</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_intermarketdealer]</id>
+              <label>INTER MARKET DEALER</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_owners_rep]</id>
+              <label>OWNERS REP</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_realestate_developer]</id>
+              <label>REAL ESTATE / DEVELOPER</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_influencers_buying_group]</id>
+              <label>BUYING GROUP</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_influencers_proj_mng_firm]</id>
+              <label>PROJECT MANAGEMENT FIRM</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
@@ -2736,25 +2500,7 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
           </fields>
-        </fieldGroup>
-        <fieldGroup scriptid="taxinformation">
-          <label>Tax Information</label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-          <fields position="MIDDLE">
-            <field>
-              <id>VATREGNUM</id>
-              <label>Tax ID</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </fieldGroup>
-        <defaultFieldGroup/>
+        </defaultFieldGroup>
       </fieldGroups>
       <subItems/>
     </tab>
@@ -2779,76 +2525,33 @@
       <label>Communication</label>
       <visible>T</visible>
       <fieldGroups>
+        <fieldGroup scriptid="printing">
+          <label>Printing</label>
+          <visible>T</visible>
+          <showTitle>T</showTitle>
+          <singleColumn>F</singleColumn>
+          <fields position="MIDDLE">
+            <field>
+              <id>TOBEPRINTED</id>
+              <label>To Be Printed</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+              <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+            </field>
+          </fields>
+        </fieldGroup>
         <defaultFieldGroup/>
       </fieldGroups>
       <subItems>
-        <subTab>
-          <id>TRANSACTIONOUTPUTOPTIONS</id>
+        <subList>
+          <id>MESSAGES</id>
           <label>Messages</label>
           <visible>T</visible>
-          <fieldGroups>
-            <defaultFieldGroup>
-              <fields position="MIDDLE">
-                <field>
-                  <id>TOBEPRINTED</id>
-                  <label>To Be Printed</label>
-                  <visible>T</visible>
-                  <mandatory>F</mandatory>
-                  <displayType>NORMAL</displayType>
-                  <columnBreak>F</columnBreak>
-                  <sameRowAsPrevious>F</sameRowAsPrevious>
-                  <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-                </field>
-                <field>
-                  <id>TOBEEMAILED</id>
-                  <label>To Be E-mailed</label>
-                  <visible>T</visible>
-                  <mandatory>F</mandatory>
-                  <displayType>NORMAL</displayType>
-                  <columnBreak>F</columnBreak>
-                  <sameRowAsPrevious>F</sameRowAsPrevious>
-                  <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-                </field>
-                <field>
-                  <id>TOBEFAXED</id>
-                  <label>To Be Faxed</label>
-                  <visible>T</visible>
-                  <mandatory>F</mandatory>
-                  <displayType>NORMAL</displayType>
-                  <columnBreak>F</columnBreak>
-                  <sameRowAsPrevious>F</sameRowAsPrevious>
-                  <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
-                </field>
-                <field>
-                  <id>MESSAGESEL</id>
-                  <label>Select Message</label>
-                  <visible>T</visible>
-                  <mandatory>F</mandatory>
-                  <displayType>NORMAL</displayType>
-                  <columnBreak>F</columnBreak>
-                  <sameRowAsPrevious>F</sameRowAsPrevious>
-                </field>
-                <field>
-                  <id>MESSAGE</id>
-                  <label>Vendor Message</label>
-                  <visible>T</visible>
-                  <mandatory>F</mandatory>
-                  <displayType>NORMAL</displayType>
-                  <columnBreak>F</columnBreak>
-                  <sameRowAsPrevious>F</sameRowAsPrevious>
-                </field>
-              </fields>
-            </defaultFieldGroup>
-          </fieldGroups>
-          <subLists>
-            <subList>
-              <id>MESSAGES</id>
-              <label>Messages</label>
-              <visible>T</visible>
-              <neverEmpty>F</neverEmpty>
-            </subList>
-          </subLists>
-        </subTab>
+          <neverEmpty>F</neverEmpty>
+        </subList>
         <subList>
           <id>ACTIVITIES</id>
           <label>Activities</label>
@@ -2897,25 +2600,25 @@
       <subItems>
         <subList>
           <id>LINKS</id>
-          <label>Receipts &amp; Bills</label>
+          <label>Payments</label>
           <visible>T</visible>
           <neverEmpty>F</neverEmpty>
         </subList>
         <subList>
-          <id>APPROVALS</id>
-          <label>Approvals</label>
+          <id>PURCHASEORDERS</id>
+          <label>Purchase Orders</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+        <subList>
+          <id>REIMBURSEMENTS</id>
+          <label>Reimbursements</label>
           <visible>T</visible>
           <neverEmpty>F</neverEmpty>
         </subList>
         <subList>
           <id>TRANSFORMATIONS</id>
           <label>Transformations</label>
-          <visible>T</visible>
-          <neverEmpty>F</neverEmpty>
-        </subList>
-        <subList>
-          <id>CASES</id>
-          <label>Support Cases</label>
           <visible>T</visible>
           <neverEmpty>F</neverEmpty>
         </subList>
@@ -2959,7 +2662,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_multi_sif]</id>
               <label>Multi SIF</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>DISABLED</displayType>
               <columnBreak>F</columnBreak>
@@ -2969,7 +2672,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_sif_processing]</id>
               <label>SIF Processing</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -2993,16 +2696,6 @@
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[scriptid=custbody_direct_bill]</id>
-              <label>Direct Billing</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-              <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
             </field>
             <field>
               <id>[scriptid=custbody_so_tsfsl_d]</id>
@@ -3037,15 +2730,6 @@
               <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>INLINETEXT</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[type=transactionbodycustomfield, scriptid=cseg_cbi_market]</id>
-              <label>Market</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
@@ -3217,7 +2901,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_literrormessage]</id>
               <label>LIT ERROR MESSAGE</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -3297,6 +2981,16 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
+              <id>[scriptid=custbody_direct_bill]</id>
+              <label>Direct Billing</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+              <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
+            </field>
+            <field>
               <id>[scriptid=custbody4]</id>
               <label>Log Folder ID</label>
               <visible>F</visible>
@@ -3335,7 +3029,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_is_split_orders]</id>
               <label>Split Orders Enabled</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>DISABLED</displayType>
               <columnBreak>F</columnBreak>
@@ -3345,7 +3039,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_lit_split_seq_id]</id>
               <label>LIT Split Sequence ID</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -3354,7 +3048,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_lit_linked_order]</id>
               <label>LIT Linked Order</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -3363,7 +3057,7 @@
             <field>
               <id>[appid=com.erpsuccess.lineimport, scriptid=custbody_esp_lit_files_obj]</id>
               <label>SIF File ID (2)</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>DISABLED</displayType>
               <columnBreak>F</columnBreak>
@@ -3407,14 +3101,13 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
-              <id>[appid=com.erpsuccess.cfipotososync, scriptid=custbody_esp_cfi_oa_for_order_rev]</id>
-              <label>For Order Revisions?</label>
-              <visible>F</visible>
+              <id>[type=transactionbodycustomfield, scriptid=cseg_esp_warehouse]</id>
+              <label>Warehouse</label>
+              <visible>T</visible>
               <mandatory>F</mandatory>
-              <displayType>INLINETEXT</displayType>
+              <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
-              <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
             </field>
           </fields>
         </defaultFieldGroup>
@@ -3422,86 +3115,11 @@
       <subItems/>
     </tab>
     <tab>
-      <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custtab_esp_influencers]</id>
-      <label>Influencers</label>
-      <visible>F</visible>
+      <id>GLIMPACTTAB</id>
+      <label>GL Impact</label>
+      <visible>T</visible>
       <fieldGroups>
-        <defaultFieldGroup>
-          <fields position="MIDDLE">
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_archdesign]</id>
-              <label> ARCH &amp; DESIGN FIRM</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_construction_manager]</id>
-              <label>CONSTRUCTION MANAGER</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_generalcontractor]</id>
-              <label>GENERAL CONTRACTOR</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_intermarketdealer]</id>
-              <label>INTER MARKET DEALER</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_owners_rep]</id>
-              <label>OWNERS REP</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_realestate_developer]</id>
-              <label>REAL ESTATE / DEVELOPER</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_influencers_buying_group]</id>
-              <label>BUYING GROUP</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.cfibaseinfluencers, scriptid=custbody_esp_influencers_proj_mng_firm]</id>
-              <label>PROJECT MANAGEMENT FIRM</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </defaultFieldGroup>
+        <defaultFieldGroup/>
       </fieldGroups>
       <subItems/>
     </tab>
@@ -3543,24 +3161,6 @@
         <defaultFieldGroup>
           <fields position="MIDDLE">
             <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_dealer]</id>
-              <label>Dealer</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_price_agreement]</id>
-              <label>Price Agreement</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
               <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_addr_bill_to]</id>
               <label>Bill To Partner Number</label>
               <visible>T</visible>
@@ -3588,24 +3188,6 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_install_addr_override]</id>
-              <label>Install At Override</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_receiving_warehouse]</id>
-              <label>Receiving Warehouse</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
               <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_bill_type]</id>
               <label>Haworth Bill Type</label>
               <visible>T</visible>
@@ -3624,6 +3206,42 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_dealer]</id>
+              <label>Dealer</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_document_id]</id>
+              <label>Haworth Document ID</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_errors]</id>
+              <label>Haworth Errors</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_install_addr_override]</id>
+              <label>Install At Override</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
               <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_order_type]</id>
               <label>Haworth Order Type</label>
               <visible>T</visible>
@@ -3633,8 +3251,35 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_haw_order_num]</id>
-              <label>Haworth Order Number</label>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_price_agreement]</id>
+              <label>Price Agreement</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_receiving_warehouse]</id>
+              <label>Receiving Warehouse</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_status]</id>
+              <label>Haworth Integration Status</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_xml_file_name]</id>
+              <label>Haworth XML File Name</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
@@ -3662,6 +3307,15 @@
               <checkBoxDefault>USE_FIELD_DEFAULT</checkBoxDefault>
             </field>
             <field>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_project_desc]</id>
+              <label>Dealer Project Description</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
               <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_proj_id]</id>
               <label>Dealer Project ID</label>
               <visible>T</visible>
@@ -3671,8 +3325,8 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_project_desc]</id>
-              <label>Dealer Project Description</label>
+              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_haw_order_num]</id>
+              <label>Haworth Order Number</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
@@ -3692,42 +3346,6 @@
               <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_haw_quote]</id>
               <label>Haworth Quote</label>
               <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_document_id]</id>
-              <label>Haworth Document ID</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_status]</id>
-              <label>Haworth Integration Status</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_errors]</id>
-              <label>Haworth Errors</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_hi_xml_file_name]</id>
-              <label>Haworth XML File Name</label>
-              <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -4144,7 +3762,7 @@
                 <field>
                   <id>[appid=com.erpsuccess.haworthconnector, scriptid=custbody_esp_cfi_hi_pr_pallet]</id>
                   <label>Packaging Request - Pallet</label>
-                  <visible>T</visible>
+                  <visible>F</visible>
                   <mandatory>F</mandatory>
                   <displayType>NORMAL</displayType>
                   <columnBreak>F</columnBreak>
@@ -4240,7 +3858,7 @@
               <label>Error</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
+              <displayType>INLINETEXT</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
@@ -4249,7 +3867,7 @@
               <label>Order Data File</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
+              <displayType>INLINETEXT</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
@@ -4258,7 +3876,7 @@
               <label>Order ID</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
+              <displayType>INLINETEXT</displayType>
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
@@ -4383,7 +4001,7 @@
             <field>
               <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custbody_esp_mc_designer]</id>
               <label>Designer</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -4401,7 +4019,7 @@
             <field>
               <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custbody_esp_mc_end_customer_contact]</id>
               <label>End Customer Contact</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -4492,7 +4110,7 @@
             <field>
               <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custbody_esp_mc_project_title]</id>
               <label>Project Title</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -4718,7 +4336,7 @@
             <field>
               <id>[appid=com.erpsuccess.manufacturerconnector, scriptid=custbody_esp_mc_send_order_btn]</id>
               <label>Send Order Button</label>
-              <visible>T</visible>
+              <visible>F</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
               <columnBreak>F</columnBreak>
@@ -4799,11 +4417,6 @@
   <actionbar>
     <buttons>
       <button>
-        <id>APPROVE</id>
-        <label>Approve</label>
-        <visible>T</visible>
-      </button>
-      <button>
         <id>RETURN</id>
         <label>Authorize Return</label>
         <visible>T</visible>
@@ -4814,38 +4427,28 @@
         <visible>T</visible>
       </button>
       <button>
-        <id>BILL</id>
-        <label>Bill</label>
+        <id>CANCELBILL</id>
+        <label>Cancel Bill</label>
         <visible>T</visible>
       </button>
       <button>
-        <id>CLOSEREMAINING</id>
-        <label>Close</label>
+        <id>CREDIT</id>
+        <label>Credit</label>
         <visible>T</visible>
       </button>
       <button>
-        <id>ENTERPREPAYMENT</id>
-        <label>Enter Prepayment</label>
+        <id>PAYMENT</id>
+        <label>Make Payment</label>
         <visible>T</visible>
       </button>
       <button>
-        <id>RECEIVE</id>
-        <label>Receive</label>
+        <id>RECALC</id>
+        <label>Recalc</label>
         <visible>T</visible>
       </button>
       <button>
-        <id>REFUND</id>
-        <label>Refund</label>
-        <visible>T</visible>
-      </button>
-      <button>
-        <id>REJECT</id>
-        <label>Reject</label>
-        <visible>T</visible>
-      </button>
-      <button>
-        <id>REVCOMRV</id>
-        <label>Reverse Revenue</label>
+        <id>VIEWEXPENSEPLANS</id>
+        <label>View Expense Plans</label>
         <visible>T</visible>
       </button>
     </buttons>
@@ -4853,16 +4456,6 @@
       <menuitem>
         <id>DELETE</id>
         <label>Delete</label>
-        <visible>T</visible>
-      </menuitem>
-      <menuitem>
-        <id>EMAIL</id>
-        <label>Email</label>
-        <visible>T</visible>
-      </menuitem>
-      <menuitem>
-        <id>FAX</id>
-        <label>Fax</label>
         <visible>T</visible>
       </menuitem>
       <menuitem>
@@ -4901,23 +4494,8 @@
         <visible>T</visible>
       </menuitem>
       <menuitem>
-        <id>PRINTLABEL</id>
-        <label>Print Label</label>
-        <visible>T</visible>
-      </menuitem>
-      <menuitem>
-        <id>SAVEEMAIL</id>
-        <label>Save &amp; Email</label>
-        <visible>T</visible>
-      </menuitem>
-      <menuitem>
         <id>SUBMITNEW</id>
         <label>Save &amp; New</label>
-        <visible>T</visible>
-      </menuitem>
-      <menuitem>
-        <id>SAVEPRINT</id>
-        <label>Save &amp; Print</label>
         <visible>T</visible>
       </menuitem>
       <menuitem>
@@ -4927,39 +4505,21 @@
       </menuitem>
     </menu>
   </actionbar>
-  <disclaimer/>
-  <address/>
   <allowAddMultiple>T</allowAddMultiple>
   <emailMessageTemplate>USE_DEFAULT</emailMessageTemplate>
   <printingType>
     <advanced>
-      <printTemplate>STDTMPLPURCHORD</printTemplate>
-      <emailTemplate>[appid=com.erpsuccess.pdfselector, scriptid=custtmpl_esp_pdfsel_po_aea]</emailTemplate>
+      <printTemplate>STDTMPLSVENDBILL</printTemplate>
+      <emailTemplate>STDTMPLSVENDBILL</emailTemplate>
     </advanced>
   </printingType>
-  <totalBox>
-    <totalBoxField>
-      <id>TOTAL</id>
-      <label>Total</label>
-      <visible>T</visible>
-    </totalBoxField>
-    <totalBoxField>
-      <id>SUBTOTAL</id>
-      <label>Subtotal</label>
-      <visible>T</visible>
-    </totalBoxField>
-  </totalBox>
   <linkedForms>
     <linkedForm>
-      <type>PURCHASE_ORDER_BILL_TRANSACTION</type>
+      <type>BILL_BILL_CREDIT_TRANSACTION</type>
       <form>USE_DEFAULT</form>
     </linkedForm>
     <linkedForm>
-      <type>PURCHASE_ORDER_ITEM_RECEIPT_TRANSACTION</type>
-      <form>USE_DEFAULT</form>
-    </linkedForm>
-    <linkedForm>
-      <type>PURCHASE_ORDER_VENDOR_RETURN_AUTHORIZATION_TRANSACTION</type>
+      <type>BILL_VENDOR_RETURN_AUTHORIZATION_TRANSACTION</type>
       <form>USE_DEFAULT</form>
     </linkedForm>
   </linkedForms>
@@ -4997,35 +4557,11 @@
       <preferred>F</preferred>
     </role>
     <role>
-      <id>[scriptid=customrole_cfi_controller]</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
       <id>CUSTOMROLE41</id>
       <preferred>F</preferred>
     </role>
     <role>
-      <id>CONSULTANT</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
-      <id>[scriptid=customrole1001]</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
-      <id>EMPLOYEE_CENTER</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
       <id>FULL_ACCESS</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
-      <id>CUSTOMROLE42</id>
-      <preferred>F</preferred>
-    </role>
-    <role>
-      <id>VENDOR_CENTER</id>
       <preferred>F</preferred>
     </role>
     <role>
